@@ -34,7 +34,7 @@ Composition-based design for better flexibility and maintainability.
 
 # Getting Started
 # 1. Clone the Repository
-git clone https://github.com/your-username/state-machine-library-java.git
+git clone (https://github.com/AhmedShaikh-developer/state-machine-transitions-and--plantuml.git)
 cd state-machine-library-java
 # 2. Set Up the Project
 Ensure you have JDK 11 installed.
