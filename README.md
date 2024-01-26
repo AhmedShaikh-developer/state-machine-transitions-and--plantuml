@@ -11,7 +11,7 @@ PlantUML Diagrams
 Contribution
 License
 
-#Overview
+# Overview
 This Java library provides a flexible and maintainable framework for creating and executing finite state machines. The library follows a three-layered architecture, promoting separation of concerns and adhering to a no-inheritance policy. It allows developers to build custom state machines with dynamic transition side effects.
 
 # Features
@@ -36,19 +36,19 @@ Composition-based design for better flexibility and maintainability.
 # 1. Clone the Repository
 git clone https://github.com/your-username/state-machine-library-java.git
 cd state-machine-library-java
-#2. Set Up the Project
+# 2. Set Up the Project
 Ensure you have JDK 11 installed.
 Compile and run the project using your preferred Java build tool.
-#3. Explore the Code
+# 3. Explore the Code
 The src directory contains the three-layered architecture.
 Review interfaces and classes for states, transitions, side effects, and state machine builders.
-#4. Use Example State Machines
-#Check out the provided state machines:
+# 4. Use Example State Machines
+Check out the provided state machines:
 SumOfDigitsEquals3: Implements a state machine for summing digits equal to 3.
 FindAbcAndPrintThings: Implements a state machine for finding the substring "Abc" with customizable logging side effects.
 Modify or create your own state machines.
-#5. PlantUML Diagrams
+# 5. PlantUML Diagrams
 Refer to the design.puml file for PlantUML diagrams illustrating the design and relationships between different layers.
 
-#License
+# License
 This State Machine Library in Java is open-source and available under the MIT License.
