@@ -1,0 +1,34 @@
+Found the A
+Found the b
+Found the c
+Found the A
+Found the b
+Did not find the c. Restarting the search...
+Found the A
+Found the b
+Found the c
+In the final state, saw a meaningless A
+In the final state, saw a meaningless b
+In the final state, saw a meaningless c
+Found the A
+Found the b
+Found the c
+In the final state, saw a meaningless d
+In the final state, saw a meaningless A
+Found the A
+Found the b
+Found the c
+Found the A
+Found the b
+Did not find the c. Restarting the search...
+Found the A
+Found the b
+Found the c
+In the final state, saw a meaningless A
+In the final state, saw a meaningless b
+In the final state, saw a meaningless c
+Found the A
+Found the b
+Found the c
+In the final state, saw a meaningless d
+In the final state, saw a meaningless A

@@ -1,0 +1,144 @@
+@startuml
+
+' Presentation Layer
+package "Presentation Layer" {
+    interface UserInterface {
+        +startStateMachine(stateMachine: StateMachine): void
+        +printOutput(message: String): void
+        +getInput(): String
+    }
+
+    class ConsoleInterface {
+        +startStateMachine(stateMachine: StateMachine): void
+        +printOutput(message: String): void
+        +getInput(): String
+    }
+}
+
+' Business Logic Layer
+package "Business Logic Layer" {
+    interface StateMachine {
+        +addState(state: State): void
+        +addTransition(transition: Transition): void
+        +setExecutionStrategy(strategy: ExecutionStrategy): void
+        +execute(input: String): void
+        +save(persistenceManager: PersistenceManager): void
+        +load(persistenceManager: PersistenceManager): void
+    }
+
+    interface State {
+        +addTransition(transition: Transition): void
+        +setExecutionStrategy(strategy: ExecutionStrategy): void
+        +executeSideEffects(): void
+    }
+
+    interface Transition {
+        +isTriggered(input: String): boolean
+        +getTargetState(): State
+        +getSideEffect(): SideEffect
+    }
+
+    interface SideEffect {
+        +execute(): void
+    }
+
+    interface ExecutionStrategy {
+        +execute(): void
+    }
+
+    interface ErrorHandler {
+        +handleError(error: String): void
+    }
+
+    class ConcreteStateMachine {
+        -states: List<State>
+        -transitions: List<Transition>
+        -executionStrategy: ExecutionStrategy
+        +execute(input: String): void
+        +setExecutionStrategy(strategy: ExecutionStrategy): void
+    }
+
+    class ConcreteState {
+        -transitions: List<Transition>
+        -executionStrategy: ExecutionStrategy
+        +addTransition(transition: Transition): void
+        +setExecutionStrategy(strategy: ExecutionStrategy): void
+        +executeSideEffects(): void
+    }
+
+    class ConcreteTransition {
+        -targetState: State
+        -sideEffect: SideEffect
+        +isTriggered(input: String): boolean
+        +getTargetState(): State
+        +getSideEffect(): SideEffect
+    }
+
+    class LogSideEffect {
+        +execute(): void
+    }
+
+    class DefaultErrorHandler {
+        +handleError(error: String): void
+    }
+
+    class ConcreteExecutionStrategy {
+        +execute(): void
+    }
+}
+
+' Data Access Layer
+package "Data Access Layer" {
+    interface PersistenceManager {
+        +saveState(stateId: String, state: State): void
+        +loadState(stateId: String): State
+        +saveTransition(transitionId: String, transition: Transition): void
+        +loadTransition(transitionId: String): Transition
+    }
+
+    class FilePersistenceManager {
+        +saveState(stateId: String, state: State): void
+        +loadState(stateId: String): State
+        +saveTransition(transitionId: String, transition: Transition): void
+        +loadTransition(transitionId: String): Transition
+    }
+}
+
+' Client's State Machines
+package "Client's State Machines" {
+    class SumOfDigitsEquals3 {
+        +execute(input: String): void
+        +save(persistenceManager: PersistenceManager): void
+        +load(persistenceManager: PersistenceManager): void
+    }
+
+    class FindAbcAndPrintThings {
+        +execute(input: String): void
+        +save(persistenceManager: PersistenceManager): void
+        +load(persistenceManager: PersistenceManager): void
+    }
+}
+
+' Relationships
+UserInterface .down.> StateMachine : triggers >
+StateMachine .right.> PersistenceManager : saves/loads >
+StateMachine .left.> ErrorHandler : handles errors >
+ConsoleInterface -up-|> UserInterface : implements >
+ConcreteStateMachine -up-|> StateMachine : implements >
+ConcreteState -up-|> State : implements >
+ConcreteTransition -up-|> Transition : implements >
+LogSideEffect -up-|> SideEffect : implements >
+DefaultErrorHandler -up-|> ErrorHandler : implements >
+FilePersistenceManager -up-|> PersistenceManager : implements >
+SumOfDigitsEquals3 -up-|> StateMachine : implements >
+FindAbcAndPrintThings -up-|> StateMachine : implements >
+ConcreteExecutionStrategy -up-|> ExecutionStrategy : implements >
+
+' Concrete Implementations
+ConcreteStateMachine -down-> "1..*" ConcreteState : contains
+ConcreteState -right-> "0..*" ConcreteTransition : contains
+ConcreteTransition -down-> ConcreteState : targets
+ConcreteTransition -left-> SideEffect : has
+ConcreteState -up-|> ExecutionStrategy : uses
+
+@enduml
